@@ -10,13 +10,13 @@ LABEL org.opencontainers.image.vendor="Fork from Cybersecurity and Infrastructur
 ARG GOPHISH_VERSION="0.11.0"
 ARG UID=421
 
-ENV USERNAME="cisa" \
-    GROUPNAME="cisa" \
-    HOME="/home/$USERNAME" \
+ENV USER="cisa" \
+    GROUP="cisa" \
+    HOME="/home/${USER}" \
     SCRIPT_DIR="/usr/local/bin"
    
-RUN addgroup --system --gid ${UID} ${USERNAME} \
-  && adduser --system --uid ${UID} --ingroup ${USERNAME} ${GROUPNAME}
+RUN addgroup --system --gid ${UID} ${USER} \
+  && adduser --system --uid ${UID} --ingroup ${USER} ${GROUP}
 
 RUN apt-get update && \
 apt-get install --no-install-recommends -y \
@@ -28,7 +28,7 @@ apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY bin/get-api-key ${SCRIPT_DIR}
 
-USER ${USERNAME}
+USER ${USER}
 WORKDIR ${HOME}
 
 RUN wget -nv https://github.com/gophish/gophish/releases/download/v${GOPHISH_VERSION}/gophish-v${GOPHISH_VERSION}-linux-64bit.zip && \
