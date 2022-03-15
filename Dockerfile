@@ -12,7 +12,7 @@ ARG UID=421
 
 ENV USER="cisa" \
     GROUP="cisa" \
-    HOME=/home/${USER} \
+    HOMEDIR="/home/$USER" \
     SCRIPT_DIR="/usr/local/bin"
    
 RUN addgroup --system --gid ${UID} ${USER} \
@@ -29,7 +29,7 @@ apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 COPY bin/get-api-key ${SCRIPT_DIR}
 
 USER ${USER}
-WORKDIR ${HOME}
+WORKDIR ${HOMEDIR}
 
 RUN wget -nv https://github.com/gophish/gophish/releases/download/v${GOPHISH_VERSION}/gophish-v${GOPHISH_VERSION}-linux-64bit.zip && \
 unzip gophish-v${GOPHISH_VERSION}-linux-64bit.zip && \
