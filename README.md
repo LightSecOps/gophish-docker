@@ -33,7 +33,7 @@ docker run cisagov/gophish:0.0.6
 
     services:
       gophish:
-        image: cisagov/gophish:0.0.6
+        image: lightsecops/gophish:0.0.6
         ports:
           - target: 3333
             published: 3333
@@ -131,7 +131,7 @@ environment variables.  See the
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/gophish:0.0.6
+    docker pull lightsecops/gophish:0.0.6
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
@@ -145,14 +145,14 @@ containerize.  It is recommended that most users use a version tag (e.g.
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/gophish:0.0.6`| An exact release version. |
-|`cisagov/gophish:0.0`| The most recent release matching the major and minor version numbers. |
-|`cisagov/gophish:0`| The most recent release matching the major version number. |
-|`cisagov/gophish:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
-|`cisagov/gophish:nightly` | A nightly build of the `develop` branch of this repository. |
-|`cisagov/gophish:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
+|`lightsecops/gophish:0.0.6`| An exact release version. |
+|`lightsecops/gophish:0.0`| The most recent release matching the major and minor version numbers. |
+|`lightsecops/gophish:0`| The most recent release matching the major version number. |
+|`lightsecops/gophish:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
+|`lightsecops/gophish:nightly` | A nightly build of the `develop` branch of this repository. |
+|`lightsecops/gophish:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
 
-See the [tags tab](https://hub.docker.com/r/cisagov/gophish/tags) on Docker
+See the [tags tab](https://hub.docker.com/r/lightsecops/gophish/tags) on Docker
 Hub for a list of all the supported tags.
 
 ## Volumes ##
@@ -212,8 +212,8 @@ Build the image locally using this git repository as the [build context](https:/
 ```console
 docker build \
   --build-arg VERSION=0.0.6 \
-  --tag cisagov/gophish:0.0.6 \
-  https://github.com/cisagov/gophish-docker.git#develop
+  --tag lightsecops/gophish:0.0.6 \
+  https://github.com/lightsecops/gophish-docker.git#develop
 ```
 
 ## Cross-platform builds ##
@@ -226,7 +226,7 @@ Docker:
    or the command line:
 
     ```console
-    git clone https://github.com/cisagov/gophish-docker.git
+    git clone https://github.com/lightsecops/gophish-docker.git
     cd gophish-docker
     ```
 

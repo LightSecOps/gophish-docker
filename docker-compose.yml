@@ -22,7 +22,7 @@ services:
         - VERSION=0.0.6
       context: .
       dockerfile: Dockerfile
-    image: cisagov/gophish
+    image: lightsecops/gophish
     init: true
     restart: always
     ports:

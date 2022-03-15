@@ -1,22 +1,22 @@
 ARG VERSION=unspecified
 
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 
 ARG VERSION
 
-# For a list of pre-defined annotation keys and value types see:
-# https://github.com/opencontainers/image-spec/blob/master/annotations.md
-# Note: Additional labels are added by the build workflow.
-LABEL org.opencontainers.image.authors="mark.feldhousen@cisa.dhs.gov"
-LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
+LABEL org.opencontainers.image.authors="rom35.vicnent@gmail.com"
+LABEL org.opencontainers.image.vendor="Fork from Cybersecurity and Infrastructure Security Agency"
 
 ARG GOPHISH_VERSION="0.11.0-cisa.1"
-ARG CISA_UID=421
-ENV CISA_HOME="/home/cisa" \
-    SCRIPT_DIR="/usr/local/bin"
+ARG UID=421
 
-RUN addgroup --system --gid ${CISA_UID} cisa \
-  && adduser --system --uid ${CISA_UID} --ingroup cisa cisa
+ENV USERNAME="cisa" \
+    GROUPNAME="cisa" \
+    HOME="/home/${USERNAME}" \
+    SCRIPT_DIR="/usr/local/bin"
+   
+RUN addgroup --system --gid ${UID} ${USERNAME} \
+  && adduser --system --uid ${UID} --ingroup ${USERNAME} ${GROUPNAME}
 
 RUN apt-get update && \
 apt-get install --no-install-recommends -y \
@@ -28,14 +28,10 @@ apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY bin/get-api-key ${SCRIPT_DIR}
 
-USER cisa
-WORKDIR ${CISA_HOME}
-# TODO: Revert from cisagov/gophish back to gophish/gophish after all of our
-# pull requests have been merged; including, but potentially not limited to:
-# - https://github.com/gophish/gophish/pull/1484
-# - https://github.com/gophish/gophish/pull/1486
-# See https://github.com/cisagov/gophish-docker/issues/25 for details.
-RUN wget -nv https://github.com/cisagov/gophish/releases/download/v${GOPHISH_VERSION}/gophish-v${GOPHISH_VERSION}-linux-64bit.zip && \
+USER ${USERNAME}
+WORKDIR ${HOME}
+
+RUN wget -nv https://github.com/gophish/gophish/releases/download/v${GOPHISH_VERSION}/gophish-v${GOPHISH_VERSION}-linux-64bit.zip && \
 unzip gophish-v${GOPHISH_VERSION}-linux-64bit.zip && \
 rm -f gophish-v${GOPHISH_VERSION}-linux-64bit.zip
 
