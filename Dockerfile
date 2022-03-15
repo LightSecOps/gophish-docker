@@ -7,7 +7,7 @@ ARG VERSION
 LABEL org.opencontainers.image.authors="rom35.vicnent@gmail.com"
 LABEL org.opencontainers.image.vendor="Fork from Cybersecurity and Infrastructure Security Agency"
 
-ARG GOPHISH_VERSION="0.11.0-cisa.1"
+ARG GOPHISH_VERSION="0.11.0"
 ARG UID=421
 
 ENV USERNAME="cisa" \
