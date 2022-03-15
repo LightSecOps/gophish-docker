@@ -16,12 +16,14 @@ token=$(curl --silent --request POST \
   '{"username": "'"$DOCKER_USERNAME"'", "password": "'"$DOCKER_PASSWORD"'"}' \
   https://hub.docker.com/v2/users/login/ | jq --raw-output .token)
 
+
+
 echo "Pushing README file..."
 code=$(jq --null-input --arg msg "$(< README.md)" \
   '{"registry":"registry-1.docker.io","full_description": $msg }' \
   | curl --silent --output /dev/null --location --write-out "%{http_code}" \
-    https://hub.docker.com/v2/repositories/"${IMAGE_NAME}"/ \
-    --data @- --request PATCH \
+    https://cloud.docker.com/v2/repositories/"${IMAGE_NAME}"/ \
+    -d @- -X PATCH \
     --header "Content-Type: application/json" \
     --header "Authorization: JWT ${token}")
 
