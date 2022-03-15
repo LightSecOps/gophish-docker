@@ -31,7 +31,7 @@ COPY bin/get-api-key ${SCRIPT_DIR}
 USER ${USERNAME}
 WORKDIR ${HOME}
 
-RUN wget -nv https://github.com/gophish/gophish/releases/download/v${GOPHISH_VERSION}/gophish-v${GOPHISH_VERSION}-linux-64bit.zip && \
+RUN wget -nv https://github.com/gophish/gophish/releases/download/v"${GOPHISH_VERSION}"/gophish-v"${GOPHISH_VERSION}"-linux-64bit.zip && \
 unzip gophish-v${GOPHISH_VERSION}-linux-64bit.zip && \
 rm -f gophish-v${GOPHISH_VERSION}-linux-64bit.zip
 
