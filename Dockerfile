@@ -14,7 +14,7 @@ ENV USER="cisa" \
     GROUP="cisa" \
     HOMEDIR="/home/cisa" \
     SCRIPT_DIR="/usr/local/bin"
-   
+
 RUN addgroup --system --gid ${UID} ${USER} \
   && adduser --system --uid ${UID} --ingroup ${USER} ${GROUP}
 
