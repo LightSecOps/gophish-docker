@@ -12,7 +12,7 @@ ARG UID=421
 
 ENV USER="cisa" \
     GROUP="cisa" \
-    HOMEDIR="/home/$USER" \
+    HOMEDIR="/home/${USER}" \
     SCRIPT_DIR="/usr/local/bin"
    
 RUN addgroup --system --gid ${UID} ${USER} \
