@@ -17,8 +17,6 @@ token=$(curl --silent --request POST \
   '{"username": "'"$DOCKER_USERNAME"'", "password": "'"$DOCKER_PASSWORD"'"}' \
   https://hub.docker.com/v2/users/login/ | jq --raw-output .token)
 
-
-
 echo "Pushing README file..."
 code=$(jq --null-input --arg msg "$(< README.md)" \
   '{"registry":"registry-1.docker.io","full_description": $msg }' \
